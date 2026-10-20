@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptus Pipeline Desk</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Aptus Pipeline Desk</h1>
+        <div id="auth-status" class="badge locked">Vault Locked</div>
+    </header>
+
+    <main>
+        <!-- Passphrase Modal / Unlock Screen -->
+        <section id="lock-screen" class="card">
+            <h2>Unlock Client Vault</h2>
+            <p>Enter your session passphrase to decrypt client PII and local storage.</p>
+            <input type="password" id="passphrase-input" placeholder="Enter session passphrase..." />
+            <button id="unlock-btn">Unlock Vault</button>
+        </section>
+
+        <!-- Main Dashboard (Hidden until unlocked) -->
+        <section id="dashboard" class="hidden">
+            <nav>
+                <button class="tab-btn active" data-tab="vault-tab">Client Vault</button>
+                <button class="tab-btn" data-tab="backup-tab">Backup & Settings</button>
+            </nav>
+
+            <!-- Client Vault Tab -->
+            <div id="vault-tab" class="tab-content active">
+                <h2>Client Profiles & Master CVs</h2>
+                <div class="actions-bar">
+                    <button id="new-client-btn">+ Add New Client</button>
+                </div>
+                <div id="client-list"></div>
+            </div>
+
+            <!-- Backup Tab -->
+            <div id="backup-tab" class="tab-content">
+                <h2>Data Management & Backups</h2>
+                <p>Keep your encrypted backups up to date. Reminder: export weekly.</p>
+                <button id="export-backup-btn">Export Encrypted Backup</button>
+                <input type="file" id="import-file-input" style="display: none;" />
+                <button id="import-backup-btn">Import Backup</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Client Modal Form -->
+    <div id="client-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modal-title">Add Client</h3>
+            <form id="client-form">
+                <input type="hidden" id="client-id">
+                <label>Full Name: <input type="text" id="client-name" required></label>
+                <label>Target Roles (comma-separated): <input type="text" id="client-roles" placeholder="DevOps Engineer, Cloud Architect" required></label>
+                <label>Citizenship / Work Auth: <input type="text" id="client-auth" required></label>
+                <label>Master CV (JSON or Raw Text): <textarea id="client-cv" rows="6" required></textarea></label>
+                <div class="modal-buttons">
+                    <button type="submit" id="save-client-btn">Save Client</button>
+                    <button type="button" id="close-modal-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
